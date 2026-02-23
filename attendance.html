@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance Marking - EduAttend</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .dashboard-container {
+            width: 100%;
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            background: #f8fafc;
+        }
+
+        .sidebar {
+            background: #1e293b;
+            color: white;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .nav-links li a {
+            color: #94a3b8;
+            text-decoration: none;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-links li a.active,
+        .nav-links li a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .main-content {
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .attendance-header {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            margin-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.8rem 1rem 0.8rem 2.8rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 0.9rem;
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #94a3b8;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 0.6rem 1rem;
+            border: 1px solid #e2e8f0;
+            background: white;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .filter-btn:hover {
+            background: #f8fafc;
+        }
+
+        .marking-list {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .student-row {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            transition: var(--transition-smooth);
+        }
+
+        .student-row:hover {
+            transform: scale(1.01);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        }
+
+        .student-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .student-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+        }
+
+        .student-name {
+            font-weight: 600;
+            color: #1e293b;
+        }
+
+        .student-id {
+            font-size: 0.8rem;
+            color: #64748b;
+        }
+
+        .attendance-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            width: 80px;
+            padding: 0.6rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .btn-p {
+            background: #f0fdf4;
+            color: #16a34a;
+        }
+
+        .btn-a {
+            background: #fef2f2;
+            color: #dc2626;
+        }
+
+        .btn-l {
+            background: #fffbeb;
+            color: #d97706;
+        }
+
+        .action-btn.active.btn-p {
+            background: #16a34a;
+            color: white;
+        }
+
+        .action-btn.active.btn-a {
+            background: #dc2626;
+            color: white;
+        }
+
+        .action-btn.active.btn-l {
+            background: #d97706;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .main-content {
+                padding-bottom: 80px;
+            }
+
+            .student-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+            }
+
+            .attendance-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+
+<body style="display: block; background: #f8fafc;">
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <div class="logo-box" style="width: 40px; height: 40px; border-radius: 10px; margin: 0;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3Z" fill="white" />
+                        <path d="M5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18Z" fill="white" />
+                    </svg>
+                </div>
+                <span>EduAttend</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="dashboard.html"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="attendance.html" class="active"><i class="fa-solid fa-calendar-check"></i> Attendance</a>
+                </li>
+                <li><a href="#"><i class="fa-solid fa-book"></i> Courses</a></li>
+                <li><a href="#"><i class="fa-solid fa-user-graduate"></i> Students</a></li>
+                <li><a href="#"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                <li style="margin-top: auto;"><a href="javascript:void(0)" onclick="logout()" style="color: #ef4444;"><i
+                            class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h1 style="font-size: 1.8rem; color: #1e293b;">Mark Attendance</h1>
+                    <p style="color: #64748b;">CS101-A • Computer Science Introduction</p>
+                </div>
+                <button class="login-button" style="width: auto; margin-top: 0; padding: 0.7rem 1.5rem;">Save
+                    Session</button>
+            </header>
+
+            <div class="attendance-header">
+                <div class="search-box">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="text" placeholder="Search student by name or ID...">
+                </div>
+                <div class="filter-group">
+                    <button class="filter-btn"><i class="fa-solid fa-sort"></i> Sort By</button>
+                    <button class="filter-btn"><i class="fa-solid fa-filter"></i> Filters</button>
+                    <button class="filter-btn" id="mark-all-present"
+                        style="background: var(--primary-blue); color: white; border: none;">Mark
+                        All Present</button>
+                </div>
+            </div>
+
+            <div class="marking-list">
+                <!-- Students will be loaded here dynamically from the backend -->
+                <div style="text-align: center; padding: 3rem; color: #94a3b8;">
+                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <p>Loading students...</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <nav class="mobile-nav">
+        <a href="dashboard.html"><i class="fa-solid fa-chart-line"></i></a>
+        <a href="attendance.html" class="active"><i class="fa-solid fa-calendar-check"></i></a>
+        <a href="#"><i class="fa-solid fa-book"></i></a>
+        <a href="#"><i class="fa-solid fa-user-graduate"></i></a>
+        <a href="javascript:void(0)" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i></a>
+    </nav>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+{
+    "name": "eduattend",
+    "version": "1.0.0",
+    "description": "EduAttend - Smart Institutional Gateway",
+    "main": "Backend/server.js",
+    "scripts": {
+        "start": "node Backend/server.js",
+        "dev": "nodemon Backend/server.js",
+        "install-backend": "cd Backend && npm install",
+        "postinstall": "npm run install-backend"
+    },
+    "dependencies": {
+        "@supabase/supabase-js": "^2.95.3",
+        "bcryptjs": "^3.0.3",
+        "cors": "^2.8.6",
+        "dotenv": "^17.2.4",
+        "express": "^5.2.1",
+        "jsonwebtoken": "^9.0.3"
+    },
+    "devDependencies": {
+        "nodemon": "^3.1.11"
+    }
+}

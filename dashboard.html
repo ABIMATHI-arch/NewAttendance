@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - EduAttend</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .dashboard-container {
+            width: 100%;
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            background: #f8fafc;
+        }
+
+        .sidebar {
+            background: #1e293b;
+            color: white;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar-logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .nav-links li a {
+            color: #94a3b8;
+            text-decoration: none;
+            padding: 0.8rem 1rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: var(--transition-smooth);
+        }
+
+        .nav-links li a.active,
+        .nav-links li a:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .main-content {
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .table-container {
+            margin-top: 2.5rem;
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+
+        th {
+            text-align: left;
+            color: #64748b;
+            font-weight: 600;
+            padding: 1rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+
+        td {
+            padding: 1rem;
+            border-bottom: 1px solid #f1f5f9;
+            color: #1e293b;
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-badge.present {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-badge.absent {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body style="display: block; background: #f8fafc;">
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <div class="logo-box" style="width: 40px; height: 40px; border-radius: 10px; margin: 0;">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3Z" fill="white" />
+                        <path d="M5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18Z" fill="white" />
+                    </svg>
+                </div>
+                <span>EduAttend</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="dashboard.html" class="active"><i class="fa-solid fa-chart-line"></i> Dashboard</a></li>
+                <li><a href="attendance.html"><i class="fa-solid fa-calendar-check"></i> Attendance</a></li>
+                <li><a href="#"><i class="fa-solid fa-book"></i> Courses</a></li>
+                <li><a href="#"><i class="fa-solid fa-user-graduate"></i> Students</a></li>
+                <li><a href="#"><i class="fa-solid fa-gear"></i> Settings</a></li>
+                <li style="margin-top: auto;"><a href="javascript:void(0)" onclick="logout()" style="color: #ef4444;"><i
+                            class="fa-solid fa-right-from-bracket"></i> Logout</a></li>
+            </ul>
+        </aside>
+
+        <main class="main-content">
+            <header style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h1 style="font-size: 1.8rem; color: #1e293b;">Welcome</h1>
+                    <p style="color: #64748b;">Here is your class overview for today.</p>
+                </div>
+                <div style="display: flex; gap: 1rem; align-items: center;">
+                    <button
+                        style="padding: 0.5rem; border: none; background: white; border-radius: 10px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); color: #64748b;"><i
+                            class="fa-solid fa-bell"></i></button>
+                    <div
+                        style="width: 40px; height: 40px; border-radius: 12px; background: #e2e8f0; overflow: hidden; border: 2px solid white; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                        <img src="https://ui-avatars.com/api/?name=Dr+Smith&background=0284c7&color=fff" alt="Profile">
+                    </div>
+                </div>
+            </header>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #e0f2fe; color: #0369a1;"><i
+                            class="fa-solid fa-users"></i></div>
+                    <div>
+                        <p style="color: #64748b; font-size: 0.9rem;">Total Students</p>
+                        <h3 style="font-size: 1.5rem; color: #1e293b;">124</h3>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #dcfce7; color: #15803d;"><i
+                            class="fa-solid fa-circle-check"></i></div>
+                    <div>
+                        <p style="color: #64748b; font-size: 0.9rem;">Avg. Attendance</p>
+                        <h3 style="font-size: 1.5rem; color: #1e293b;">92%</h3>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon" style="background: #fef9c3; color: #a16207;"><i
+                            class="fa-solid fa-clock"></i></div>
+                    <div>
+                        <p style="color: #64748b; font-size: 0.9rem;">Active Courses</p>
+                        <h3 style="font-size: 1.5rem; color: #1e293b;">5</h3>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                    <h2 style="font-size: 1.2rem; color: #1e293b;">Recent Attendance</h2>
+                    <a href="attendance.html"
+                        style="color: var(--primary-blue); background: none; border: none; font-weight: 600; cursor: pointer; text-decoration: none;">View
+                        All</a>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Student Name</th>
+                            <th>Course ID</th>
+                            <th>Time</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="display: flex; align-items: center; gap: 0.75rem;">
+                                <img src="https://ui-avatars.com/api/?name=Alex+Johnson&background=f1f5f9&color=6366f1"
+                                    style="width: 32px; border-radius: 8px;">
+                                Alex Johnson
+                            </td>
+                            <td>CS101-A</td>
+                            <td>09:15 AM</td>
+                            <td><span class="status-badge present">Present</span></td>
+                        </tr>
+                        <tr>
+                            <td style="display: flex; align-items: center; gap: 0.75rem;">
+                                <img src="https://ui-avatars.com/api/?name=Sarah+Miller&background=f1f5f9&color=ec4899"
+                                    style="width: 32px; border-radius: 8px;">
+                                Sarah Miller
+                            </td>
+                            <td>CS101-A</td>
+                            <td>09:20 AM</td>
+                            <td><span class="status-badge present">Present</span></td>
+                        </tr>
+                        <tr>
+                            <td style="display: flex; align-items: center; gap: 0.75rem;">
+                                <img src="https://ui-avatars.com/api/?name=James+Wilson&background=f1f5f9&color=f59e0b"
+                                    style="width: 32px; border-radius: 8px;">
+                                James Wilson
+                            </td>
+                            <td>CS101-B</td>
+                            <td>-</td>
+                            <td><span class="status-badge absent">Absent</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <nav class="mobile-nav">
+        <a href="dashboard.html" class="active"><i class="fa-solid fa-chart-line"></i></a>
+        <a href="attendance.html"><i class="fa-solid fa-calendar-check"></i></a>
+        <a href="#"><i class="fa-solid fa-book"></i></a>
+        <a href="#"><i class="fa-solid fa-user-graduate"></i></a>
+        <a href="javascript:void(0)" onclick="logout()"><i class="fa-solid fa-right-from-bracket"></i></a>
+    </nav>
+    <script src="script.js"></script>
+</body>
+
+</html>

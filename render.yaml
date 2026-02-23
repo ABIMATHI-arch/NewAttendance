@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: eduattend-app
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node Backend/server.js
+    envVars:
+      - key: NODE_VERSION
+        value: 18.0.0
+      - key: PORT
+        value: 5000
+      - key: JWT_SECRET
+        fromContext: true
+      - key: SUPABASE_URL
+        fromContext: true
+      - key: SUPABASE_ANON_KEY
+        fromContext: true
+    staticPublishNum: 0

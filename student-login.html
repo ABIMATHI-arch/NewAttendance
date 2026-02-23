@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal Login - EduAttend</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="login-body">
+    <main class="login-container page-transition-enter">
+        <header class="hero-section" style="margin-bottom: 2rem;">
+            <div class="logo-box"
+                style="width: 60px; height: 60px; border-radius: 50%; background: radial-gradient(circle, #3b82f6, #1d4ed8);">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3Z" fill="white" />
+                    <path d="M5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18Z" fill="white" />
+                </svg>
+            </div>
+            <h1 style="color: #1e293b; margin-top: 1.5rem; font-size: 2rem;">Welcome Back!</h1>
+            <p style="color: #64748b; font-weight: 300;">Sign in to track your attendance and check your schedule.</p>
+        </header>
+
+        <section class="login-card"
+            style="box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); border: 1px solid #f1f5f9;">
+            <form id="studentLoginForm">
+                <div class="form-group">
+                    <label for="studentEmail">Username</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="studentEmail" placeholder="Enter Username" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">PASSWORD</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                        <i class="fa-solid fa-eye" style="left: auto; right: 1rem; cursor: pointer;"
+                            id="togglePassword"></i>
+                    </div>
+                    <a href="#" class="forgot-link"
+                        style="text-align: right; margin-top: 0.5rem; display: block;">Forgot password?</a>
+                </div>
+
+                <button type="submit" class="login-button">Login <i class="fa-solid fa-arrow-right"
+                        style="margin-left: 0.5rem;"></i></button>
+            </form>
+
+            <div style="margin: 2rem 0; position: relative; text-align: center;">
+                <hr style="border: 0; border-top: 1px solid #e2e8f0;">
+                <span
+                    style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: #fff; padding: 0 1rem; color: #94a3b8; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px;">Or
+                    login with</span>
+            </div>
+
+            <div class="social-login">
+                <button class="social-btn"><i class="fa-solid fa-face-smile"></i></button>
+                <button class="social-btn"><i class="fa-solid fa-fingerprint"></i></button>
+            </div>
+
+            <p style="margin-top: 2rem; color: #64748b; text-align: center; font-size: 0.85rem;">
+                "Ready for today's classes?"
+            </p>
+            <p style="margin-top: 1rem; text-align: center; font-size: 0.85rem;">
+                New student? <a href="#"
+                    style="color: var(--primary-blue); text-decoration: none; font-weight: 600;">Contact Registrar</a>
+            </p>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

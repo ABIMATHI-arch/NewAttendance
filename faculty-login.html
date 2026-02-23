@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faculty Portal Login - EduAttend</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body class="login-body">
+    <main class="login-container page-transition-enter">
+        <header class="hero-section" style="margin-bottom: 2rem;">
+            <div class="logo-box" style="width: 60px; height: 60px; border-radius: 15px;">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 3L1 9L12 15L21 10.09V17H23V9L12 3Z" fill="white" />
+                    <path d="M5 13.18V17.18L12 21L19 17.18V13.18L12 17L5 13.18Z" fill="white" />
+                </svg>
+            </div>
+            <h1 style="color: #1e293b; margin-top: 1.5rem; font-size: 2rem;">Faculty Portal</h1>
+            <p style="color: #64748b; font-weight: 300;">Manage your attendance and courses</p>
+        </header>
+
+        <section class="login-card">
+            <form id="facultyLoginForm">
+                <div class="form-group">
+                    <label for="facultyId">Username</label>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" id="facultyId" placeholder="Enter Username" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <label for="password">Password</label>
+                        <a href="#" class="forgot-link" style="margin-bottom: 0.5rem;">Forgot?</a>
+                    </div>
+                    <div class="input-wrapper">
+                        <i class="fa-solid fa-lock"></i>
+                        <input type="password" id="password" placeholder="••••••••" required>
+                        <i class="fa-solid fa-eye" style="left: auto; right: 1rem; cursor: pointer;"
+                            id="togglePassword"></i>
+                    </div>
+                </div>
+
+                <div class="form-group" style="display: flex; align-items: center; gap: 0.5rem;">
+                    <input type="checkbox" id="remember">
+                    <label for="remember" style="margin-bottom: 0; font-weight: 400; cursor: pointer;">Remember this
+                        device</label>
+                </div>
+
+                <button type="submit" class="login-button">Sign In <i class="fa-solid fa-arrow-right"
+                        style="margin-left: 0.5rem;"></i></button>
+            </form>
+
+            <div style="margin-top: 2rem; text-align: center;">
+                <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1rem;">Use Biometrics</p>
+                <div style="font-size: 2rem; color: #94a3b8; cursor: pointer;">
+                    <i class="fa-solid fa-face-smile"></i>
+                </div>
+            </div>
+        </section>
+
+        <footer style="margin-top: 3rem; text-align: center;">
+            <div
+                style="background: #f1f5f9; padding: 0.5rem 1rem; border-radius: 50px; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.75rem; color: #64748b;">
+                <i class="fa-solid fa-shield-halved" style="color: var(--primary-blue);"></i>
+                Protected by Institutional MFA
+            </div>
+            <div
+                style="margin-top: 1.5rem; display: flex; gap: 1rem; font-size: 0.8rem; color: #94a3b8; justify-content: center;">
+                <a href="#" style="color: inherit; text-decoration: none;">SUPPORT</a>
+                <span>•</span>
+                <a href="#" style="color: inherit; text-decoration: none;">SECURITY POLICY</a>
+            </div>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
